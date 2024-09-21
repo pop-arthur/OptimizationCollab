@@ -1,7 +1,8 @@
-class Vector: 
+class Vector:
     """
     Class of vectors
     """
+
     def __init__(self, row=None):
         """
         You may initialise vector with known numbers - row, or without them
@@ -20,3 +21,10 @@ class Vector:
         self.row = list(map(float, temp.split()))  # Convert input to list of floats
         self.numb_of_columns = len(self.row)
         return self
+
+    def __getitem__(self, item):
+        return self.row[item]
+
+    def multiply_by(self, coefficient):
+        for i in range(len(self.row)):
+            self.row[i] = self.row[i] * coefficient

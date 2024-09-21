@@ -2,6 +2,7 @@ class Matrix:
     """
     Class of matrix
     """
+
     def __init__(self, matrix=None):
         """
         You may initialise vector with known numbers - matrix, or without them
