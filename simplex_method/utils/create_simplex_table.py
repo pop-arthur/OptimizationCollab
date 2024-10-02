@@ -39,4 +39,5 @@ def create_simplex_table(vcof: Vector, mccf: Matrix, vrhsn: Vector, apac: float)
         # define solution
         simplex_table[i + 2][-2] = vrhsn[i]
 
+
     return simplex_table
