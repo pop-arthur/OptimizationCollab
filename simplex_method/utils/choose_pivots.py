@@ -24,7 +24,10 @@ def choose_pivot_element(simplex_table):
     #creating new pivot row
     new_pivot_row=[simplex_table[0][piv_col_ind]]
     for i in range(1, len(simplex_table[piv_row_ind])):
-        new_pivot_row.append(simplex_table[piv_row_ind][i]/pivot_el)
+        if i != len(simplex_table[piv_row_ind])-1:
+            new_pivot_row.append(simplex_table[piv_row_ind][i]/pivot_el)
+        else:
+            new_pivot_row.append(simplex_table[piv_row_ind][i])
 
     #changing the old pivot row to new one
     simplex_table[piv_row_ind]=new_pivot_row

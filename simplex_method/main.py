@@ -1,4 +1,5 @@
 from simplex_method.utils.choose_pivots import choose_pivot_element
+from simplex_method.utils.compute_new_table import compute_new_simplex_table
 from utils import *
 from tabulate import tabulate
 
@@ -13,4 +14,9 @@ if __name__ == '__main__':
     print(tabulate(simplex_table))
     tbl, piv_row_ind, piv_col_ind = choose_pivot_element(simplex_table)
     print(tabulate(tbl))
+    # Compute the new simplex table
+    updated_table = compute_new_simplex_table(tbl, piv_row_ind, piv_col_ind)
+    print(tabulate(updated_table))
+    tbl2, piv_row_ind2, piv_col_ind2 = choose_pivot_element(updated_table)
+    print(tabulate(tbl2))
 
