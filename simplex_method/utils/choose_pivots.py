@@ -6,7 +6,7 @@ def choose_pivot_element(simplex_table):
 
     #calculate ratio
     piv_col_ind=simplex_table[1].index(min(simplex_table[1][1:-2]))
-    for i in range(1, len(simplex_table)):
+    for i in range(2, len(simplex_table)):
         simplex_table[i][-1]=simplex_table[i][-2]/simplex_table[i][piv_col_ind]
 
     #selecting appropriate ratios

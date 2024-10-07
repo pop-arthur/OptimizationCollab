@@ -3,7 +3,7 @@ from typing import List, Any
 from simplex_method.objects import *
 
 
-def create_simplex_table(vcof: Vector, mccf: Matrix, vrhsn: Vector, apac: float) -> List[List[Any]]:
+def create_simplex_table(vcof: Vector, mccf: Matrix, vrhsn: Vector) -> List[List[Any]]:
     # create table
     simplex_table = [
         [0 for _ in range(vcof.numb_of_columns + mccf.numb_of_rows + 3)] for _ in range(mccf.numb_of_rows + 2)
