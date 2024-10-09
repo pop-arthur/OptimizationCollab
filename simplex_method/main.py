@@ -31,11 +31,11 @@ def simplex_method():
         updated_table = compute_new_simplex_table(tbl, piv_row_ind, piv_col_ind)
         # print(tabulate(updated_table))
         simplex_table = updated_table
-        print(tabulate(simplex_table))
+        # print(tabulate(simplex_table))
 
     final_table = round_table(simplex_table, apac)
     # print("\nFinal Simplex Table (rounded to inputed accuracy):")
-    # print(tabulate(final_table))
+    print(tabulate(final_table))
     print("A vector of decision variables:", get_vector(final_table, vcof.numb_of_columns))
     print("Maximum value of the objective function:", get_solution(final_table))
     
