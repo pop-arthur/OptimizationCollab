@@ -1,6 +1,6 @@
 from typing import Tuple
 
-from simplex_method.objects import *
+from objects import *
 
 
 def input_variables() -> Tuple[Vector, Matrix, Vector, float]:

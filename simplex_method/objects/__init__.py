@@ -1,2 +1,2 @@
-from simplex_method.objects.Matrix import Matrix
-from simplex_method.objects.Vector import Vector
+from objects.Matrix import Matrix
+from objects.Vector import Vector

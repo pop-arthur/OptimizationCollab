@@ -1,6 +1,6 @@
 from typing import List, Any
 
-from simplex_method.objects import *
+from objects import *
 
 
 def create_simplex_table(vcof: Vector, mccf: Matrix, vrhsn: Vector) -> List[List[Any]]:
@@ -35,7 +35,8 @@ def create_simplex_table(vcof: Vector, mccf: Matrix, vrhsn: Vector) -> List[List
         # define x
         simplex_table[i + 2][1:mccf.numb_of_columns + 1] = mccf.matrix[i]
         # define slack variable
-        simplex_table[i + 2][4 + i] = 1
+        slack_column = simplex_table[0].index(f"s_{i+1}")
+        simplex_table[i + 2][slack_column] = 1
         # define solution
         simplex_table[i + 2][-2] = vrhsn[i]
 

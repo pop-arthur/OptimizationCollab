@@ -1,6 +1,6 @@
 import math
 
-from simplex_method.objects import *
+from objects import *
 
 def choose_pivot_element(simplex_table):
 
