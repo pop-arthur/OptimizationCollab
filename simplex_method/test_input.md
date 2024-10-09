@@ -67,6 +67,7 @@ Degeneracy - Lectue 4
 Answer: `The method is not applicable!`
 
 ## Problem 6
+[Link](https://1cov-edu.ru/linejnoe-programmirovanie/simpleks-metod/primer-net-resheniya/)
 ```
 4 5 4
 2 3 -6
