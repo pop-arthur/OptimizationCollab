@@ -18,6 +18,7 @@ def input_variables() -> Tuple[Vector, Matrix, Vector, float]:
 
     print('Lastly, enter the approximation accuracy:')
     apac = float(input())
+    """
     # for dev purpouse only. Delete before prod.
     print("Objective Function Coefficients:", vcof.row)
     print("Constraint Matrix:")
@@ -26,4 +27,5 @@ def input_variables() -> Tuple[Vector, Matrix, Vector, float]:
     print("Right-Hand Side Vector:", vrhsn.row)
     print("Approximation Accuracy:", apac)
     # end of block to be deleted
+    """
     return vcof, mccf, vrhsn, apac

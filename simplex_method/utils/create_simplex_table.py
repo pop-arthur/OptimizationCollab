@@ -39,6 +39,8 @@ def create_simplex_table(vcof: Vector, mccf: Matrix, vrhsn: Vector) -> List[List
         simplex_table[i + 2][slack_column] = 1
         # define solution
         simplex_table[i + 2][-2] = vrhsn[i]
+        # edit ratio
+        simplex_table[i + 2][-1] = "-"
 
 
     return simplex_table
