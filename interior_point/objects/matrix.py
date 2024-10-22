@@ -1,4 +1,5 @@
 class Matrix:
+    #TODO Add comments
     def __init__(self, rows, cols, numbers=None):
         self.rows = rows
         self.columns = cols
