@@ -1,6 +1,6 @@
 class Matrix:
     #TODO Add comments
-    def __init__(self, rows, cols, numbers=None):
+    def __init__(self, rows=0, cols=0, numbers=None):
         self.rows = rows
         self.columns = cols
         if numbers:
@@ -143,3 +143,28 @@ class Matrix:
             matrix_str += ' '.join(f"{x:.2f}" for x in row) + '\n'
         return matrix_str.strip()
 
+    def input(self):
+        """
+        Function to get user input and populate the matrix dynamically.
+        Parses input row by row and updates matrix dimensions accordingly.
+        """
+        self.numbers = []
+
+        while True:
+            temp = input()
+            if temp == "":  # Stop input when user presses Enter twice
+                break
+            row = list(map(float, temp.split()))  # Convert input row to list of floats
+
+            # Check if all rows have the same number of columns
+            if self.numbers and len(row) != len(self.numbers[0]):
+                print(f"Row length mismatch. Expected {len(self.numbers[0])} values.")
+                continue
+
+            self.numbers.append(row)
+
+        # Update rows and columns based on input
+        self.rows = len(self.numbers)
+        self.columns = len(self.numbers[0]) if self.rows > 0 else 0
+
+        return self
