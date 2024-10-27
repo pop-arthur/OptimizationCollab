@@ -1,13 +1,16 @@
-from interior_point.objects.matrix import *
+from objects.matrix import *
 
 def intpoint(C, A, X, b, apac, alpha):
     i = 1
     while True:
+        print(X.columns, X.columns )
         emptyMatrix = Matrix(X.columns, X.columns)
         print(emptyMatrix)
         print(X.columns)
         print(X)
-        D = emptyMatrix.identity() * X
+        print(emptyMatrix.identity())
+        D = emptyMatrix.identity() * X.transpose()
+        print(D)
         AA = A * D
         CC = D * C
         I = emptyMatrix.identity()
