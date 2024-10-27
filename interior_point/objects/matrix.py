@@ -1,6 +1,11 @@
+from typing import Union
+
+
 class Matrix:
-    #TODO Add comments
-    def __init__(self, rows=0, cols=0, numbers=None):
+    def __init__(self, rows:int=0, cols:int=0, numbers=None):
+        """
+        Initializes a matrix with the given dimensions and values.
+        """
         self.rows = rows
         self.columns = cols
         if numbers:
@@ -8,7 +13,11 @@ class Matrix:
         else:
             self.numbers = [[0 for _ in range(cols)] for _ in range(rows)]
 
-    def __sub__(self, other):
+
+    def __sub__(self, other:'Matrix') -> 'Matrix':
+        """
+        Subtracts another matrix from this matrix.
+        """
         if self.rows == other.rows and self.columns == other.columns:
             result = Matrix(self.rows, self.columns)
             for i in range(self.rows):
@@ -18,7 +27,11 @@ class Matrix:
         else:
             raise Exception("Error: the dimensional problem occurred")
 
-    def __add__(self, other):
+
+    def __add__(self, other: 'Matrix') -> 'Matrix':
+        """
+        Adds this matrix with another matrix.
+        """
         if self.rows == other.rows and self.columns == other.columns:
             result = Matrix(self.rows, self.columns)
             for i in range(self.rows):
@@ -27,8 +40,12 @@ class Matrix:
             return result
         else:
             raise Exception("Error: the dimensional problem occurred")
+    
 
-    def __mul__(self, other):
+    def __mul__(self, other: Union['Matrix', int, float]) -> 'Matrix':
+        """
+        Multiplies this matrix with another matrix or a scalar.
+        """
         if (isinstance(other, Matrix)):
             if self.columns == other.rows:
                 result = Matrix(self.rows, other.columns)
@@ -51,14 +68,22 @@ class Matrix:
         else:
             raise Exception("Error: trying to multiply a matrix with a wrong type")
 
-    def transpose(self):
+
+    def transpose(self) -> 'Matrix':
+        """
+        Returns the transpose of this matrix.
+        """
         result = Matrix(self.columns, self.rows)
         for i in range(self.rows):
             for j in range(self.columns):
                 result.numbers[j][i] = self.numbers[i][j]
         return result
 
-    def determinant(self):
+
+    def determinant(self) -> float:
+        """
+        Returns the determinant of this matrix.
+        """
         temp = [row[:] for row in self.numbers]
         n = len(temp)
         det = 1
@@ -83,7 +108,11 @@ class Matrix:
             det *= temp[i][i]
         return det
 
-    def identity(self):
+
+    def identity(self) -> 'Matrix':
+        """
+        Returns an identity matrix of the same size as this matrix.
+        """
         if self.rows != self.columns:
             raise Exception("Error: Identity matrix must be square.")
         identity_matrix = Matrix(self.rows, self.rows)
@@ -91,7 +120,11 @@ class Matrix:
             identity_matrix.numbers[i][i] = 1
         return identity_matrix
 
-    def nullify(self, row, col, row_to_start):
+
+    def nullify(self, row:int, col:int, row_to_start:int) -> None:
+        """
+        Nullifies the specified row and column in this matrix.
+        """
         row -= 1
         col -= 1
         for j in range(row_to_start, self.rows):
@@ -101,7 +134,11 @@ class Matrix:
                     for i in range(self.columns):
                         self.numbers[row][i] -= self.numbers[j][i] * multiplier
 
-    def exchange(self, i1, i2):
+
+    def exchange(self, i1:int, i2:int) -> None:
+        """
+        Exchanges the rows at the specified indices in this matrix.
+        """
         i1 -= 1
         i2 -= 1
         if i1 < self.rows and i2 < self.rows:
@@ -109,7 +146,11 @@ class Matrix:
         else:
             raise Exception("Error: Index out of bounds.")
 
-    def inverse(self):
+
+    def inverse(self) -> 'Matrix':
+        """
+        Returns the inverse of this matrix.
+        """
         if self.rows != self.columns:
             raise Exception("Error: Matrix must be square for inversion.")
 
@@ -174,13 +215,17 @@ class Matrix:
             return new_matrix
 
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """
+        Returns a string representation of this matrix.
+        """
         matrix_str = ''
         for row in self.numbers:
             matrix_str += ' '.join(f"{x:.2f}" for x in row) + '\n'
         return matrix_str.strip()
 
-    def input(self, vector_input:bool=False):
+
+    def input(self, vector_input:bool=False) -> 'Matrix':
         """
         Function to get user input and populate the matrix dynamically.
         Parses input row by row and updates matrix dimensions accordingly.
@@ -209,6 +254,8 @@ class Matrix:
         if vector_input:
             return self.transpose()
         return self
+    
+    
 if __name__ == "__main__":
     # Example usage
     v = Matrix().input(True)
