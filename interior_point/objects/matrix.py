@@ -38,6 +38,8 @@ class Matrix:
         """
         Adds this matrix with another matrix.
         """
+        print('\n\n\n ====  ADDITION  ====\n')
+        print(self, '\n___\n', other)
         if self.rows == other.rows and self.columns == other.columns:
             result = Matrix(self.rows, self.columns)
             for i in range(self.rows):
@@ -246,15 +248,23 @@ class Matrix:
 
 
     @staticmethod
-    def ones(cols: int, rows:int = 1, number:Union[int, float] = 1) -> 'Matrix':
+    def ones(cols: int = 1, rows:int = 1, number:Union[int, float] = 1) -> 'Matrix':
         """
         Returns a new matrix with all elements set to number (default 1).
-        params: cols: Number of columns in the matrix
+        params: cols: Number of columns in the matrix (default 1)
         params: rows: Number of rows in the matrix (default 1)
         params: number: Number to fill in the matrix (default 1)
         """
         return Matrix(rows, number, [[number for _ in range(cols)] for _ in range(rows)])
 
+
+    # Define __iter__ to make the class instance iterable
+    def __iter__(self):
+        """
+        Returns an iterator for traversing the matrix's elements.
+        """
+        return iter(self.numbers)
+    
 
     def __str__(self) -> str:
         """

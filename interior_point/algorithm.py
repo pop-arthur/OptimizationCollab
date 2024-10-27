@@ -20,17 +20,18 @@ def intpoint(C, A, X, b, apac, alpha):
                 Cpmult.numbers[i][j]=Cpmult.numbers[i][j]*coeff
 
         print(Cpmult)
-        I = Cpmult.ones(Cp.rows, 1)
+        I = Cpmult.ones(rows=Cp.rows) #I is equal to the elements from diagonal of Cpmult
         print(I)
         XX = I + Cpmult
         X = D * XX
 
         # check if the algorithm is complete
         ind = 0
-        for i in X:
-            if i < 0:
-                ind += 1
-        if i == 0:
+        for i in X: #go through each row of X
+            for j in i: #go through each element in the row
+                if j < 0: 
+                    ind += 1 #increment index if element is negative
+        if ind == 0: # if no negative elements found, algorithm is complete
             break
 
     print("A vector of decision variables x* for alpha = ", alpha, ": ", X, "\n")
