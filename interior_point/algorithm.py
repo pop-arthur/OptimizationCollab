@@ -1,7 +1,6 @@
 from objects.matrix import *
 
 def intpoint(C, A, X, b, apac, alpha):
-    i = 1
     while True:
         D = X.diag()
         AA = A * D
@@ -9,7 +8,7 @@ def intpoint(C, A, X, b, apac, alpha):
         F = AA * (AA.transpose())
         FI = F.inverse()
         H = (AA.transpose() * FI) * AA
-        I = Matrix(H.columns, H.columns).identity()
+        I = Matrix.identity(H.columns, H.columns)
         P = I - H
         Cp = P * CC
         nu = abs(min(Cp.numbers[0]))

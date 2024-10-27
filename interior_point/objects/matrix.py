@@ -31,7 +31,7 @@ class Matrix:
                     result.numbers[i][j] = self.numbers[i][j] - other.numbers[i][j]
             return result
         else:
-            raise Exception("Error: the dimensional problem occurred")
+            raise ValueError("Error: the dimensional problem occurred")
 
 
     def __add__(self, other: 'Matrix') -> 'Matrix':
@@ -47,7 +47,7 @@ class Matrix:
                     result.numbers[i][j] = self.numbers[i][j] + other.numbers[i][j]
             return result
         else:
-            raise Exception("Error: the dimensional problem occurred")
+            raise ValueError("Error: the dimensional problem occurred")
     
 
     def __mul__(self, other: Union['Matrix', int, float]) -> 'Matrix':
@@ -74,7 +74,7 @@ class Matrix:
                     result.numbers[i][j] = self.numbers[i][j] * other
             return result
         else:
-            raise Exception("Error: trying to multiply a matrix with a wrong type")
+            raise ValueError("Error: trying to multiply a matrix with a wrong type")
 
 
     def __rmul__(self, other: Union[int, float]) -> 'Matrix':
@@ -85,7 +85,7 @@ class Matrix:
                     result.numbers[i][j] = self.numbers[i][j] * other
             return result
         else:
-            raise Exception("Error: trying to multiply a matrix with a wrong type")
+            raise ValueError("Error: trying to multiply a matrix with a wrong type")
 
 
     def transpose(self) -> 'Matrix':
@@ -128,29 +128,30 @@ class Matrix:
         return det
 
 
-    def identity(self) -> 'Matrix':
-        """
-        Returns an identity matrix of the same size as this matrix.
-        """
-        if self.rows != self.columns:
-            raise Exception("Error: Identity matrix must be square.")
-        identity_matrix = Matrix(self.rows, self.rows)
-        for i in range(self.rows):
-            identity_matrix.numbers[i][i] = 1
-        return identity_matrix
-
-
-    # @staticmethod
-    # def identity(rows:int, columns:int) -> 'Matrix':
+    #TODO: Delete the following method after checking if it's still needed
+    # def identity(self) -> 'Matrix':
     #     """
     #     Returns an identity matrix of the same size as this matrix.
     #     """
-    #     if rows != columns:
+    #     if self.rows != self.columns:
     #         raise Exception("Error: Identity matrix must be square.")
-    #     identity_matrix = Matrix(rows, rows)
-    #     for i in range(rows):
+    #     identity_matrix = Matrix(self.rows, self.rows)
+    #     for i in range(self.rows):
     #         identity_matrix.numbers[i][i] = 1
     #     return identity_matrix
+
+
+    @staticmethod
+    def identity(rows:int, columns:int) -> 'Matrix':
+        """
+        Returns an identity matrix of the same size as this matrix.
+        """
+        if rows != columns:
+            raise Exception("Error: Identity matrix must be square.")
+        identity_matrix = Matrix(rows, rows)
+        for i in range(rows):
+            identity_matrix.numbers[i][i] = 1
+        return identity_matrix
     
 
     def nullify(self, row:int, col:int, row_to_start:int) -> None:
@@ -184,10 +185,10 @@ class Matrix:
         Returns the inverse of this matrix.
         """
         if self.rows != self.columns:
-            raise Exception("Error: Matrix must be square for inversion.")
+            raise ValueError("Error: Matrix must be square for inversion.")
 
         temp = Matrix(self.rows, self.columns, [row[:] for row in self.numbers])
-        identity_matrix = self.identity()
+        identity_matrix = Matrix.identity(self.rows, self.columns)
         n = temp.rows
 
         for i in range(n):
@@ -228,6 +229,8 @@ class Matrix:
         """
         Returns a new matrix with the elements from vector on diagonal. Or vector with elements from diagonal of matrix.
         """
+        if (self.rows == self.columns and self.rows == 0):
+            return Matrix(self.rows, self.columns)
         if (self.rows > self.columns and self.columns == 1):
             new_matrix = Matrix(self.rows, self.rows)
             for i in range(self.rows):
@@ -255,7 +258,7 @@ class Matrix:
         params: rows: Number of rows in the matrix (default 1)
         params: number: Number to fill in the matrix (default 1)
         """
-        return Matrix(rows, number, [[number for _ in range(cols)] for _ in range(rows)])
+        return Matrix(rows=rows, cols=cols, numbers=[[number for _ in range(cols)] for _ in range(rows)])
 
 
     # Define __iter__ to make the class instance iterable
@@ -307,16 +310,65 @@ class Matrix:
         return self
     
 
+def main():
+    # Create matrices for testing
+    print("Creating two matrices for testing addition and subtraction:")
+    mat1 = Matrix(2, 2, [[1, 2], [3, 4]])
+    mat2 = Matrix(2, 2, [[5, 6], [7, 8]])
+    print("Matrix 1:\n", mat1)
+    print("Matrix 2:\n", mat2)
+
+    # Matrix addition
+    try:
+        print("\nMatrix Addition Result:\n", mat1 + mat2)
+    except Exception as e:
+        print(e)
+
+    # Matrix subtraction
+    try:
+        print("\nMatrix Subtraction Result:\n", mat1 - mat2)
+    except Exception as e:
+        print(e)
+
+    # Scalar multiplication
+    print("\nScalar Multiplication of Matrix 1 by 3:\n", mat1 * 3)
+
+    # Matrix multiplication
+    mat3 = Matrix(2, 3, [[1, 2, 3], [4, 5, 6]])
+    mat4 = Matrix(3, 2, [[7, 8], [9, 10], [11, 12]])
+    print("\nMatrix 3:\n", mat3)
+    print("Matrix 4:\n", mat4)
+    try:
+        print("\nMatrix Multiplication (Matrix 3 * Matrix 4):\n", mat3 * mat4)
+    except Exception as e:
+        print(e)
+
+    # Transpose
+    print("\nTranspose of Matrix 3:\n", mat3.transpose())
+
+    # Determinant
+    print("\nDeterminant of Matrix 1:", mat1.determinant())
+
+    # Identity matrix
+    try:
+        print("\nIdentity Matrix of size 3x3:\n", Matrix(3, 3).identity())
+    except Exception as e:
+        print(e)
+
+    # Diagonal matrix from vector
+    vec = Matrix(3, 1, [[1], [2], [3]])
+    print("\nDiagonal Matrix from Vector:\n", vec.diag())
+
+    # Inverse
+    invertible_mat = Matrix(2, 2, [[4, 7], [2, 6]])
+    try:
+        print("\nInverse of a 2x2 matrix:\n", invertible_mat.inverse())
+    except Exception as e:
+        print(e)
+
+    # Creating a matrix of ones
+    print("\n4x4 Matrix of Ones:\n", Matrix.ones(4, 4))
+
 if __name__ == "__main__":
-    # Example usage
-    v = Matrix().input(True)
-    print(v)
-    print("Transposed:")
-    print(v.transpose())
-    print("Diagonal matrix:")
-    print(v.diag())
-    print(Matrix(2, 4)*Matrix(4, 2))
-    print(Matrix(4, 4).identity()*3)
-    print(3 * Matrix(4, 4).identity())
-    print(Matrix.ones(4))
-    print(Matrix.ones(4,4))
+    main()
+
