@@ -10,8 +10,6 @@ def intpoint(C, A, X, b, apac, alpha):
         H = (AA.transpose() * FI) * AA
         I = Matrix.identity(H.columns, H.columns)
         P = I - H
-        print("P dimensions:", P.rows, P.columns)
-        print("CC dimensions:", CC.rows, CC.columns)
         Cp = P * CC
 
 
@@ -22,13 +20,13 @@ def intpoint(C, A, X, b, apac, alpha):
             for j in range(Cp.columns):
                 Cpmult.numbers[i][j]=Cpmult.numbers[i][j]*coeff
 
-        print(Cpmult)
+        print(Cpmult) #TODO: Check if we need this line
         I = Cpmult.ones(rows=Cp.rows) #I is equal to the elements from diagonal of Cpmult
-        print(I)
+        print(I)#TODO: Check if we need this line
         XX = I + Cpmult
         X = D * XX
 
-        # check if the algorithm is complete
+        #TODO: check if the algorithm is complete
         ind = 0
         for i in X: #go through each row of X
             for j in i: #go through each element in the row

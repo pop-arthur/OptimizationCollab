@@ -38,8 +38,6 @@ class Matrix:
         """
         Adds this matrix with another matrix.
         """
-        print('\n\n\n ====  ADDITION  ====\n')
-        print(self, '\n___\n', other)
         if self.rows == other.rows and self.columns == other.columns:
             result = Matrix(self.rows, self.columns)
             for i in range(self.rows):
@@ -54,7 +52,6 @@ class Matrix:
         """
         Multiplies this matrix with another matrix or a scalar.
         """
-        print("Matrix type: ", type(other))
         if (isinstance(other, Matrix)):
             if self.columns == other.rows:
                 result = Matrix(self.rows, other.columns)
@@ -63,11 +60,7 @@ class Matrix:
                         result.numbers[i][j] = sum(self.numbers[i][k] * other.numbers[k][j] for k in range(self.columns))
                 return result
             else:
-                print("\n \n\ n")
-                print("Matrix dimensions are not compatible for multiplication: ")
-                print(self, '\n___\n', other)
-                print(self.columns, other.rows, "Cannot multiply these matrices" )
-                raise Exception("Error: the dimensional problem occurred")
+                raise ValueError("Error: the dimensional problem occurred")
         elif (isinstance(other, int) or isinstance(other, float)):
             result = Matrix(self.rows, self.columns)
             for i in range(self.rows):

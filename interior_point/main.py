@@ -1,6 +1,7 @@
 from input_vars import input_vars
 from algorithm import intpoint
 from objects import *
+#Do we actually need code in comments?
 # A = Matrix(3,3,[[1, 2, 3], [0, 1, 4], [0, 0, 1]])
 # print(A)
 # print()
