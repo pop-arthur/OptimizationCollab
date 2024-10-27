@@ -48,7 +48,7 @@ class Matrix:
             raise ValueError("Error: the dimensional problem occurred")
     
 
-    def __mul__(self, other: Union['Matrix', int, float]) -> 'Matrix':
+    def __mul__(self, other: 'Matrix' or int or float) -> 'Matrix':
         """
         Multiplies this matrix with another matrix or a scalar.
         """
