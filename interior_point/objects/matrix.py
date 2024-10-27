@@ -29,18 +29,27 @@ class Matrix:
             raise Exception("Error: the dimensional problem occurred")
 
     def __mul__(self, other):
-        if self.columns == other.rows:
-            result = Matrix(self.rows, other.columns)
+        if (isinstance(other, Matrix)):
+            if self.columns == other.rows:
+                result = Matrix(self.rows, other.columns)
+                for i in range(self.rows):
+                    for j in range(other.columns):
+                        result.numbers[i][j] = sum(self.numbers[i][k] * other.numbers[k][j] for k in range(self.columns))
+                return result
+            else:
+                print("\n \n\ n")
+                print("Matrix dimensions are not compatible for multiplication: ")
+                print(self, '\n___\n', other)
+                print(self.columns, other.rows, "Cannot multiply these matrices" )
+                raise Exception("Error: the dimensional problem occurred")
+        elif (isinstance(other, int) or isinstance(other, float)):
+            result = Matrix(self.rows, self.columns)
             for i in range(self.rows):
-                for j in range(other.columns):
-                    result.numbers[i][j] = sum(self.numbers[i][k] * other.numbers[k][j] for k in range(self.columns))
+                for j in range(self.columns):
+                    result.numbers[i][j] = self.numbers[i][j] * other
             return result
         else:
-            print("\n \n\ n")
-            print("Matrix dimensions are not compatible for multiplication: ")
-            print(self, '\n___\n', other)
-            print(self.columns, other.rows, "Cannot multiply these matrices" )
-            raise Exception("Error: the dimensional problem occurred")
+            raise Exception("Error: trying to multiply a matrix with a wrong type")
 
     def transpose(self):
         result = Matrix(self.columns, self.rows)
