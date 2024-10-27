@@ -69,6 +69,17 @@ class Matrix:
             raise Exception("Error: trying to multiply a matrix with a wrong type")
 
 
+    def __rmul__(self, other: Union[int, float]) -> 'Matrix':
+        if (isinstance(other, int) or isinstance(other, float)):
+            result = Matrix(self.rows, self.columns)
+            for i in range(self.rows):
+                for j in range(self.columns):
+                    result.numbers[i][j] = self.numbers[i][j] * other
+            return result
+        else:
+            raise Exception("Error: trying to multiply a matrix with a wrong type")
+
+
     def transpose(self) -> 'Matrix':
         """
         Returns the transpose of this matrix.
@@ -255,7 +266,7 @@ class Matrix:
             return self.transpose()
         return self
     
-    
+
 if __name__ == "__main__":
     # Example usage
     v = Matrix().input(True)
@@ -265,3 +276,5 @@ if __name__ == "__main__":
     print("Diagonal matrix:")
     print(v.diag())
     print(Matrix(2, 4)*Matrix(4, 2))
+    print(Matrix(4, 4).identity()*3)
+    print(3 * Matrix(4, 4).identity())
