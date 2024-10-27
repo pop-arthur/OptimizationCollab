@@ -3,17 +3,12 @@ from objects.matrix import *
 def intpoint(C, A, X, b, apac, alpha):
     i = 1
     while True:
-        print(X.columns, X.columns )
-        emptyMatrix = Matrix(X.columns, X.columns)
-        print(emptyMatrix)
-        print(X.columns)
-        print(X)
-        print(emptyMatrix.identity())
-        D = emptyMatrix.identity() * X.transpose()
-        print(D)
+        D = X.diag()
+        print('D: ', D)
         AA = A * D
+        print('AA: ', AA)
         CC = D * C
-        I = emptyMatrix.identity()
+        I = Matrix(X.columns, X.columns).identity()
         F = AA * (AA.transpose())
         FI = F.inverse()
         H = (AA * FI) * AA
