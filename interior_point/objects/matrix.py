@@ -7,7 +7,7 @@ class Matrix:
     Class of matrices where you can perform operations like addition, subtraction, multiplication, transpose, find the determinant, inverse, etc.
     """
 
-    
+
     def __init__(self, rows:int=0, cols:int=0, numbers=None):
         """
         Initializes a matrix with the given dimensions and values.
@@ -246,14 +246,14 @@ class Matrix:
 
 
     @staticmethod
-    def ones(number: int, rows:int = 1, number_to_fill:Union[int, float] = 1) -> 'Matrix':
+    def ones(cols: int, rows:int = 1, number:Union[int, float] = 1) -> 'Matrix':
         """
-        Returns a new matrix with all elements set to 1.
-        params: number: Number of columns in the matrix
+        Returns a new matrix with all elements set to number (default 1).
+        params: cols: Number of columns in the matrix
         params: rows: Number of rows in the matrix (default 1)
-        params: number_to_fill: Number to fill in the matrix (default 1)
+        params: number: Number to fill in the matrix (default 1)
         """
-        return Matrix(rows, number, [[number_to_fill for _ in range(number)] for _ in range(rows)])
+        return Matrix(rows, number, [[number for _ in range(number)] for _ in range(rows)])
 
 
     def __str__(self) -> str:
