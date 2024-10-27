@@ -132,6 +132,19 @@ class Matrix:
         return identity_matrix
 
 
+    @staticmethod
+    def identity(rows:int, columns:int) -> 'Matrix':
+        """
+        Returns an identity matrix of the same size as this matrix.
+        """
+        if rows != columns:
+            raise Exception("Error: Identity matrix must be square.")
+        identity_matrix = Matrix(rows, rows)
+        for i in range(rows):
+            identity_matrix.numbers[i][i] = 1
+        return identity_matrix
+    
+
     def nullify(self, row:int, col:int, row_to_start:int) -> None:
         """
         Nullifies the specified row and column in this matrix.
@@ -226,6 +239,16 @@ class Matrix:
             return new_matrix
 
 
+    @staticmethod
+    def ones(number: int, rows:int = 1) -> 'Matrix':
+        """
+        Returns a new matrix with all elements set to 1.
+        params: number: Number of columns in the matrix
+        params: rows: Number of rows in the matrix (default 1)
+        """
+        return Matrix(rows, number, [[(1.0) for _ in range(number)] for _ in range(rows)])
+
+
     def __str__(self) -> str:
         """
         Returns a string representation of this matrix.
@@ -278,3 +301,5 @@ if __name__ == "__main__":
     print(Matrix(2, 4)*Matrix(4, 2))
     print(Matrix(4, 4).identity()*3)
     print(3 * Matrix(4, 4).identity())
+    print(Matrix.ones(4))
+    print(Matrix.ones(4,4))
