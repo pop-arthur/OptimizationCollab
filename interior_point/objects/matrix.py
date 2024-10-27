@@ -36,6 +36,10 @@ class Matrix:
                     result.numbers[i][j] = sum(self.numbers[i][k] * other.numbers[k][j] for k in range(self.columns))
             return result
         else:
+            print("\n \n\ n")
+            print("Matrix dimensions are not compatible for multiplication: ")
+            print(self, '\n___\n', other)
+            print(self.columns, other.rows, "Cannot multiply these matrices" )
             raise Exception("Error: the dimensional problem occurred")
 
     def transpose(self):
@@ -137,20 +141,40 @@ class Matrix:
 
         return identity_matrix
 
+
+    def diag(self) -> 'Matrix':
+        """
+        Returns a new matrix with the elements from vector on diagonal.
+        """
+        if (self.rows > self.columns):
+            new_matrix = Matrix(self.rows, self.rows)
+            for i in range(self.rows):
+                new_matrix.numbers[i][i] = self.numbers[i][0]
+            return new_matrix
+        else:
+            new_matrix = Matrix(self.columns, self.columns)
+            for i in range(self.columns):
+                new_matrix.numbers[i][i] = self.numbers[0][i]
+            return new_matrix
+        
+
+
     def __str__(self):
         matrix_str = ''
         for row in self.numbers:
             matrix_str += ' '.join(f"{x:.2f}" for x in row) + '\n'
         return matrix_str.strip()
 
-    def input(self):
+    def input(self, vector_input:bool=False):
         """
         Function to get user input and populate the matrix dynamically.
         Parses input row by row and updates matrix dimensions accordingly.
         """
         self.numbers = []
-
+        iter:int = 0
         while True:
+            if vector_input and iter != 0:
+                break
             temp = input()
             if temp == "":  # Stop input when user presses Enter twice
                 break
@@ -162,9 +186,20 @@ class Matrix:
                 continue
 
             self.numbers.append(row)
+            iter += 1
 
         # Update rows and columns based on input
         self.rows = len(self.numbers)
         self.columns = len(self.numbers[0]) if self.rows > 0 else 0
-
+        if vector_input:
+            return self.transpose()
         return self
+if __name__ == "__main__":
+    # Example usage
+    v = Matrix().input(True)
+    print(v)
+    print("Transposed:")
+    print(v.transpose())
+    print("Diagonal matrix:")
+    print(v.diag())
+    print(Matrix(2, 4)*Matrix(4, 2))
