@@ -144,19 +144,25 @@ class Matrix:
 
     def diag(self) -> 'Matrix':
         """
-        Returns a new matrix with the elements from vector on diagonal.
+        Returns a new matrix with the elements from vector on diagonal. Or vector with elements from diagonal of matrix.
         """
-        if (self.rows > self.columns):
+        if (self.rows > self.columns and self.columns == 1):
             new_matrix = Matrix(self.rows, self.rows)
             for i in range(self.rows):
                 new_matrix.numbers[i][i] = self.numbers[i][0]
             return new_matrix
-        else:
+        elif (self.rows < self.columns and self.columns == 1):
             new_matrix = Matrix(self.columns, self.columns)
             for i in range(self.columns):
                 new_matrix.numbers[i][i] = self.numbers[0][i]
             return new_matrix
-        
+        elif self.rows == self.columns and self.rows == 1:
+            return Matrix(1, 1, [self.numbers[0][0]])
+        elif self.rows == self.columns:
+            new_matrix = Matrix(self.rows, 1)
+            for i in range(self.rows):
+                new_matrix.numbers[0][i] = self.numbers[i][i]
+            return new_matrix
 
 
     def __str__(self):
