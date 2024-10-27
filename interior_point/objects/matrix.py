@@ -2,6 +2,12 @@ from typing import Union
 
 
 class Matrix:
+    """
+    An ultimate solution for linear algebra problems.\n
+    Class of matrices where you can perform operations like addition, subtraction, multiplication, transpose, find the determinant, inverse, etc.
+    """
+
+    
     def __init__(self, rows:int=0, cols:int=0, numbers=None):
         """
         Initializes a matrix with the given dimensions and values.
