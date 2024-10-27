@@ -1,1 +1,1 @@
-from objects.Matrix import Matrix
+from interior_point.objects.matrix import Matrix
