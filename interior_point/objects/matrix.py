@@ -240,13 +240,14 @@ class Matrix:
 
 
     @staticmethod
-    def ones(number: int, rows:int = 1) -> 'Matrix':
+    def ones(number: int, rows:int = 1, number_to_fill:Union[int, float] = 1) -> 'Matrix':
         """
         Returns a new matrix with all elements set to 1.
         params: number: Number of columns in the matrix
         params: rows: Number of rows in the matrix (default 1)
+        params: number_to_fill: Number to fill in the matrix (default 1)
         """
-        return Matrix(rows, number, [[(1.0) for _ in range(number)] for _ in range(rows)])
+        return Matrix(rows, number, [[number_to_fill for _ in range(number)] for _ in range(rows)])
 
 
     def __str__(self) -> str:
