@@ -4,18 +4,25 @@ def intpoint(C, A, X, b, apac, alpha):
     i = 1
     while True:
         D = X.diag()
-        print('D: ', D)
         AA = A * D
-        print('AA: ', AA)
         CC = D * C
-        I = Matrix(X.columns, X.columns).identity()
         F = AA * (AA.transpose())
         FI = F.inverse()
-        H = (AA * FI) * AA
+        H = (AA.transpose() * FI) * AA
+        I = Matrix(H.columns, H.columns).identity()
         P = I - H
         Cp = P * CC
         nu = abs(min(Cp.numbers[0]))
-        XX = I + ((alpha / nu) * Cp)
+        Cpmult = Cp
+        coeff=(alpha / nu)
+        for i in range (Cp.rows):
+            for j in range(Cp.columns):
+                Cpmult.numbers[i][j]=Cpmult.numbers[i][j]*coeff
+
+        print(Cpmult)
+        I = Cpmult.ones(Cp.rows, 1)
+        print(I)
+        XX = I + Cpmult
         X = D * XX
 
         # check if the algorithm is complete

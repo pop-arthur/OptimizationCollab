@@ -138,17 +138,17 @@ class Matrix:
         return identity_matrix
 
 
-    @staticmethod
-    def identity(rows:int, columns:int) -> 'Matrix':
-        """
-        Returns an identity matrix of the same size as this matrix.
-        """
-        if rows != columns:
-            raise Exception("Error: Identity matrix must be square.")
-        identity_matrix = Matrix(rows, rows)
-        for i in range(rows):
-            identity_matrix.numbers[i][i] = 1
-        return identity_matrix
+    # @staticmethod
+    # def identity(rows:int, columns:int) -> 'Matrix':
+    #     """
+    #     Returns an identity matrix of the same size as this matrix.
+    #     """
+    #     if rows != columns:
+    #         raise Exception("Error: Identity matrix must be square.")
+    #     identity_matrix = Matrix(rows, rows)
+    #     for i in range(rows):
+    #         identity_matrix.numbers[i][i] = 1
+    #     return identity_matrix
     
 
     def nullify(self, row:int, col:int, row_to_start:int) -> None:
@@ -253,7 +253,7 @@ class Matrix:
         params: rows: Number of rows in the matrix (default 1)
         params: number: Number to fill in the matrix (default 1)
         """
-        return Matrix(rows, number, [[number for _ in range(number)] for _ in range(rows)])
+        return Matrix(rows, number, [[number for _ in range(cols)] for _ in range(rows)])
 
 
     def __str__(self) -> str:
