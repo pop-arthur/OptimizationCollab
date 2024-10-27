@@ -54,6 +54,7 @@ class Matrix:
         """
         Multiplies this matrix with another matrix or a scalar.
         """
+        print("Matrix type: ", type(other))
         if (isinstance(other, Matrix)):
             if self.columns == other.rows:
                 result = Matrix(self.rows, other.columns)

@@ -10,7 +10,11 @@ def intpoint(C, A, X, b, apac, alpha):
         H = (AA.transpose() * FI) * AA
         I = Matrix.identity(H.columns, H.columns)
         P = I - H
+        print("P dimensions:", P.rows, P.columns)
+        print("CC dimensions:", CC.rows, CC.columns)
         Cp = P * CC
+
+
         nu = abs(min(Cp.numbers[0]))
         Cpmult = Cp
         coeff=(alpha / nu)
