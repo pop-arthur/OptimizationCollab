@@ -324,6 +324,9 @@ class Matrix:
     
 
 def main():
+    """
+    Main function to demonstrate the usage of the Matrix class.
+    """
     # Create matrices for testing
     print("Creating two matrices for testing addition and subtraction:")
     mat1 = Matrix(2, 2, [[1, 2], [3, 4]])
