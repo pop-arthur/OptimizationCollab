@@ -11,5 +11,5 @@ from simplex_method.objects import Vector, Matrix
 vcof, mccf, inix, vrhsn, apac = input_vars()
 intpoint(vcof, mccf, inix, vrhsn, apac, 0.5)
 intpoint(vcof, mccf, inix, vrhsn, apac, 0.9)
-#Change code bellow somehow
+#Change params of function bellow somehow
 simplex_method(vcof, mccf, vrhsn, apac) #TODO: Correct the input arguments to the simplex_method classes. It should be Vector, Matrix, Vector, and float.
