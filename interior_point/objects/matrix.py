@@ -73,7 +73,7 @@ class Matrix:
 
 
     def __rmul__(self, other: Union[int, float]) -> 'Matrix':
-        if (isinstance(other, int) or isinstance(other, float)):
+        if (isinstance(other, (int,float))):
             result = Matrix(self.rows, self.columns)
             for i in range(self.rows):
                 for j in range(self.columns):
@@ -271,7 +271,7 @@ class Matrix:
         """
         Returns the Euclidean norm of this matrix.
         """
-        squared_sum = sum(sum(x**2 for x in column) for column in self)
+        squared_sum = sum(sum(x**2 for x in row) for row in self.numbers)
         return math.sqrt(squared_sum)
 
     # Define __iter__ to make the class instance iterable
