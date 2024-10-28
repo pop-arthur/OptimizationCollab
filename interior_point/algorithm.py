@@ -31,16 +31,13 @@ def intpoint(C, A, X, b, apac, alpha):
         Cp = P * CC
 
         nu = abs(min(Cp.numbers[0]))
-        Cpmult = Cp.copy()
         coeff = (alpha / nu)
-        for i in range(Cp.rows):
-            for j in range(Cp.columns):
-                Cpmult.numbers[i][j] = Cpmult.numbers[i][j] * coeff
+        Cpmult = Cp * coeff
         I = Cpmult.ones(rows=Cp.rows)  # I is equal to the elements from diagonal of Cpmult
         XX = I + Cpmult
         X = D * XX
         matr = X - v
-        norm = math.sqrt((sum((x[0]) ** 2 for x in matr.numbers)))
+        norm = matr.norm()
         print(X)
         print(norm, "\n")
         if norm <= apac:
