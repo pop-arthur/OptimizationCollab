@@ -1,6 +1,6 @@
 import math
 from typing import Union
-
+import copy
 
 class Matrix:
     """
@@ -97,11 +97,11 @@ class Matrix:
         """
         Returns a new copy of this matrix.
         """
-        new = Matrix(self.rows, self.columns)
-        for i in range(self.rows):
-            for j in range(self.columns):
-                new.numbers[i][j]=self.numbers[i][j]
-
+        # new = Matrix(self.rows, self.columns)
+        # for i in range(self.rows):
+        #     for j in range(self.columns):
+        #         new.numbers[i][j]=self.numbers[i][j]
+        new = copy.deepcopy(self)
         return new
 
 
