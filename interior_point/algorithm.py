@@ -1,37 +1,41 @@
+import math
+
 from objects.matrix import *
 
+
 def intpoint(C, A, X, b, apac, alpha):
-    i = 1
     while True:
+        v = X.copy()
         D = X.diag()
         AA = A * D
         CC = D * C
         F = AA * (AA.transpose())
         FI = F.inverse()
         H = (AA.transpose() * FI) * AA
-        I = Matrix(H.columns, H.columns).identity()
+        I = Matrix.identity(H.columns, H.columns)
         P = I - H
         Cp = P * CC
-        nu = abs(min(Cp.numbers[0]))
-        Cpmult = Cp
-        coeff=(alpha / nu)
-        for i in range (Cp.rows):
+        arr = []
+        for i in Cp.numbers:
+            arr.append(i[0])
+        nu = abs(min(arr))
+        Cpmult = Cp.copy()
+        coeff = (alpha / nu)
+        for i in range(Cp.rows):
             for j in range(Cp.columns):
-                Cpmult.numbers[i][j]=Cpmult.numbers[i][j]*coeff
-
-        print(Cpmult)
-        I = Cpmult.ones(rows=Cp.rows) #I is equal to the elements from diagonal of Cpmult
-        print(I)
+                Cpmult.numbers[i][j] = Cpmult.numbers[i][j] * coeff
+        I = Cpmult.ones(rows=Cp.rows)  # I is equal to the elements from diagonal of Cpmult
         XX = I + Cpmult
         X = D * XX
-
-        # check if the algorithm is complete
-        ind = 0
-        for i in X: #go through each row of X
-            for j in i: #go through each element in the row
-                if j < 0: 
-                    ind += 1 #increment index if element is negative
-        if ind == 0: # if no negative elements found, algorithm is complete
+        matr = X - v
+        norm = math.sqrt((sum((x[0]) ** 2 for x in matr.numbers)))
+        if norm <= apac:
             break
 
-    print("A vector of decision variables x* for alpha = ", alpha, ": ", X, "\n")
+    print("A vector of decision variables x* for alpha = ", alpha, ": \n", X, "\n")
+    C.transpose()
+    X.transpose()
+    value=0
+    for i in range (C.rows):
+            value+=C.numbers[i][0]*X.numbers[i][0]
+    print("Maximum/minimum value of the objective function for alpha = ", alpha, ": ", value, "\n")

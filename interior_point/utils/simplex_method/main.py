@@ -1,15 +1,22 @@
-from simplex_method.utils.input_variables import input_variables
-from utils import *
-from tabulate import tabulate
+from typing import Tuple
+from .utils.input_variables import input_variables
+from .utils import *
+from .objects.Matrix import Matrix
+from .objects.Vector import Vector
+# from tabulate import tabulate #TODO: What is this for?
 
 
 NOT_APPLICABLE_MESSAGE = "The method is not applicable!"
 
 
-def simplex_method(vcof, mccf, vrhsn, apac):
+def simplex_method(vcof: Vector, mccf: Matrix, vrhsn:Vector, apac:float):
     # Get user input
     # vcof, mccf, vrhsn, apac = input_variables()
-    
+    print(type(vcof), type(mccf), type(vrhsn), type(apac))
+    if not (isinstance(vcof, Vector) and isinstance(mccf, Matrix) and isinstance(vrhsn, Vector)):
+        raise ValueError("All inputs must be Vector and Matrix instances. Проще говоря пошёл нахуй")
+    print(isinstance(vcof, Vector))
+    print(vcof.numb_of_columns)
     # check number of variables greater or equal to number of constrains
     if vcof.numb_of_columns < vrhsn.numb_of_columns:
         print(NOT_APPLICABLE_MESSAGE)
@@ -40,5 +47,9 @@ def simplex_method(vcof, mccf, vrhsn, apac):
     
     
 if __name__ == '__main__':
-    vcof, mccf, vrhsn, apac = input_variables()
+    vcof:Vector = Vector()
+    mccf:Matrix = Matrix()
+    vrhsn:Vector = Vector()
+    apac:float = 0.0001  # accuracy of the solution
+    Tuple[vcof: Vector, mccf:Matrix, vrhsn:Vector, apac:float] = input_variables()
     simplex_method(vcof, mccf, vrhsn, apac)

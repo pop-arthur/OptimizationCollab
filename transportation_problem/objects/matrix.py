@@ -91,7 +91,6 @@ class Matrix:
         for i in range(self.rows):
             for j in range(self.columns):
                 result.numbers[j][i] = self.numbers[i][j]
-
         return result
 
     def copy(self):
