@@ -1,5 +1,6 @@
+import math
 from typing import Union
-
+import copy
 
 class Matrix:
     """
@@ -72,7 +73,7 @@ class Matrix:
 
 
     def __rmul__(self, other: Union[int, float]) -> 'Matrix':
-        if (isinstance(other, int) or isinstance(other, float)):
+        if (isinstance(other, (int,float))):
             result = Matrix(self.rows, self.columns)
             for i in range(self.rows):
                 for j in range(self.columns):
@@ -94,11 +95,14 @@ class Matrix:
         return result
 
     def copy(self):
-        new = Matrix(self.rows, self.columns)
-        for i in range(self.rows):
-            for j in range(self.columns):
-                new.numbers[i][j]=self.numbers[i][j]
-
+        """
+        Returns a new copy of this matrix.
+        """
+        # new = Matrix(self.rows, self.columns)
+        # for i in range(self.rows):
+        #     for j in range(self.columns):
+        #         new.numbers[i][j]=self.numbers[i][j]
+        new = copy.deepcopy(self)
         return new
 
 
@@ -264,6 +268,13 @@ class Matrix:
         return Matrix(rows=rows, cols=cols, numbers=[[number for _ in range(cols)] for _ in range(rows)])
 
 
+    def norm(self) -> float:
+        """
+        Returns the Euclidean norm of this matrix.
+        """
+        squared_sum = sum(sum(x**2 for x in row) for row in self.numbers)
+        return math.sqrt(squared_sum)
+
     # Define __iter__ to make the class instance iterable
     def __iter__(self):
         """
@@ -314,6 +325,9 @@ class Matrix:
     
 
 def main():
+    """
+    Main function to demonstrate the usage of the Matrix class.
+    """
     # Create matrices for testing
     print("Creating two matrices for testing addition and subtraction:")
     mat1 = Matrix(2, 2, [[1, 2], [3, 4]])
@@ -336,6 +350,9 @@ def main():
     # Scalar multiplication
     print("\nScalar Multiplication of Matrix 1 by 3:\n", mat1 * 3)
 
+    # Scalar multiplication
+    print("\nScalar Multiplication of Matrix 1 by 3:\n", 3 * mat1)
+
     # Matrix multiplication
     mat3 = Matrix(2, 3, [[1, 2, 3], [4, 5, 6]])
     mat4 = Matrix(3, 2, [[7, 8], [9, 10], [11, 12]])
@@ -354,7 +371,7 @@ def main():
 
     # Identity matrix
     try:
-        print("\nIdentity Matrix of size 3x3:\n", Matrix(3, 3).identity())
+        print("\nIdentity Matrix of size 3x3:\n", Matrix.identity(3,3))
     except Exception as e:
         print(e)
 
