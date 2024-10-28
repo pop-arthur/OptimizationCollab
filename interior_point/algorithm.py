@@ -39,7 +39,7 @@ def intpoint(C, A, X, b, apac, alpha):
         matr = X - v
         norm = matr.norm()
         print(X)
-        print(norm, "\n")
+        print("norm: ",norm, "\n")
         if norm <= apac:
             break
 
