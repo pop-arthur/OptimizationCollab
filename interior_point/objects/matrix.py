@@ -92,6 +92,14 @@ class Matrix:
                 result.numbers[j][i] = self.numbers[i][j]
         return result
 
+    def copy(self):
+        new = Matrix(self.rows, self.columns)
+        for i in range(self.rows):
+            for j in range(self.columns):
+                new.numbers[i][j]=self.numbers[i][j]
+
+        return new
+
 
     def determinant(self) -> float:
         """
