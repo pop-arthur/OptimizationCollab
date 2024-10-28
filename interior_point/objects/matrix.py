@@ -277,7 +277,7 @@ class Matrix:
         """
         matrix_str = ''
         for row in self.numbers:
-            matrix_str += ' '.join(f"{x:.2f}" for x in row) + '\n'
+            matrix_str += ' '.join(f"{x}" for x in row) + '\n'
         return matrix_str.strip()
 
 
