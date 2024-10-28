@@ -2,6 +2,7 @@ from objects.matrix import *
 
 def intpoint(C, A, X, b, apac, alpha):
     while True:
+        v=X
         D = X.diag()
         AA = A * D
         CC = D * C
@@ -23,7 +24,9 @@ def intpoint(C, A, X, b, apac, alpha):
         I = Cpmult.ones(rows=Cp.rows) #I is equal to the elements from diagonal of Cpmult
         XX = I + Cpmult
         X = D * XX
-
-        if norm(np.subtract(yy, v), ord=2) < 0.00001:
+        norm=sum(x[0]**2 for x in (X-v).numbers)
+        print(X)
+        if norm < 0.00001:
+            break
 
     print("A vector of decision variables x* for alpha = ", alpha, ": \n", X, "\n")
