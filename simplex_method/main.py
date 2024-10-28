@@ -1,3 +1,4 @@
+from simplex_method.utils.input_variables import input_variables
 from utils import *
 from tabulate import tabulate
 
@@ -5,9 +6,9 @@ from tabulate import tabulate
 NOT_APPLICABLE_MESSAGE = "The method is not applicable!"
 
 
-def simplex_method():
+def simplex_method(vcof, mccf, vrhsn, apac):
     # Get user input
-    vcof, mccf, vrhsn, apac = input_variables()
+    # vcof, mccf, vrhsn, apac = input_variables()
     
     # check number of variables greater or equal to number of constrains
     if vcof.numb_of_columns < vrhsn.numb_of_columns:
@@ -39,4 +40,5 @@ def simplex_method():
     
     
 if __name__ == '__main__':
-    simplex_method()
+    vcof, mccf, vrhsn, apac = input_variables()
+    simplex_method(vcof, mccf, vrhsn, apac)

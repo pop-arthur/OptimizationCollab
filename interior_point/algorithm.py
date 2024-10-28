@@ -15,8 +15,10 @@ def intpoint(C, A, X, b, apac, alpha):
         I = Matrix.identity(H.columns, H.columns)
         P = I - H
         Cp = P * CC
-
-        nu = abs(min(Cp.numbers[0]))
+        arr = []
+        for i in Cp.numbers:
+            arr.append(i[0])
+        nu = abs(min(arr))
         Cpmult = Cp.copy()
         coeff = (alpha / nu)
         for i in range(Cp.rows):
@@ -27,9 +29,13 @@ def intpoint(C, A, X, b, apac, alpha):
         X = D * XX
         matr = X - v
         norm = math.sqrt((sum((x[0]) ** 2 for x in matr.numbers)))
-        print(X)
-        print(norm, "\n")
         if norm <= apac:
             break
 
     print("A vector of decision variables x* for alpha = ", alpha, ": \n", X, "\n")
+    C.transpose()
+    X.transpose()
+    value=0
+    for i in range (C.rows):
+            value+=C.numbers[i][0]*X.numbers[i][0]
+    print("Maximum/minimum value of the objective function for alpha = ", alpha, ": ", value, "\n")
