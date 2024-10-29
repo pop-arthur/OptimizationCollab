@@ -1,8 +1,14 @@
 from tabulate import tabulate
 
 
+# class representing transportation table
 class Table:
     def __init__(self, supply, costs, demand):
+        """
+        :param supply: vector of supply
+        :param costs: matrix of costs
+        :param demand: vector of demand
+        """
         self.table = [
             [*costs[i], supply[i]] for i in range(len(supply))
         ] + [[*demand, sum(demand)]]
@@ -23,10 +29,17 @@ class Table:
             )
         )
 
+    # abstract method that should be defined in subclasses
     def get_solution(self):
         pass
 
     def process_subtraction(self, x, y):
+        """
+        method that process operations over table when solution is defined
+        :param x: x coordinate of solution
+        :param y: y coordinate of solution
+        :return: solution string
+        """
         # get possible amount
         amount = min(self.supply[x], self.demand[y])
         # get price of transportation

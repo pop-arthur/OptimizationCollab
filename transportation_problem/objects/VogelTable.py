@@ -2,11 +2,15 @@ from transportation_problem.objects.Table import Table
 from copy import deepcopy
 
 
+# class for Vogel's approximation method
 class VogelTable(Table):
     def __init__(self, table: Table):
         super().__init__(table.supply.copy(), deepcopy(table.costs), table.demand.copy())
 
     def get_rows_delta(self):
+        """
+        :return: list of differences between two minimum numbers in each row
+        """
         delta_rows = []
         for i in range(len(self.costs)):
             sorted_row = list(filter(lambda x: x != 0, sorted(self.costs[i])))
@@ -20,6 +24,9 @@ class VogelTable(Table):
         return delta_rows
 
     def get_columns_delta(self):
+        """
+        :return: list of differences between two minimum numbers in each column
+        """
         delta_columns = []
         for j in range(len(self.costs[0])):
             sorted_column = sorted([self.costs[i][j] for i in range(len(self.costs)) if self.costs[i][j] != 0])
@@ -32,6 +39,10 @@ class VogelTable(Table):
         return delta_columns
 
     def get_solution(self):
+        """
+        method for Vogel's approximation method
+        :return: vector of solution x0
+        """
         # vector of solution
         solution = []
         while True:

@@ -2,14 +2,21 @@ from transportation_problem.objects.Table import Table
 from copy import deepcopy
 
 
-class RusselTable(Table):
+# class for Russell's approximation method
+class RussellTable(Table):
     def __init__(self, table: Table):
         super().__init__(table.supply.copy(), deepcopy(table.costs), table.demand.copy())
 
     def get_max_in_the_row(self):
+        """
+        :return: list of maximum values in each row
+        """
         return [max(row) for row in self.costs]
 
     def get_max_in_the_column(self):
+        """
+        :return: list of maximum values in each column
+        """
         res = []
         for j in range(len(self.costs[0])):
             res.append(
@@ -18,6 +25,10 @@ class RusselTable(Table):
         return res
 
     def get_solution(self):
+        """
+        method for Russell's approximation method
+        :return: vector of solution x0
+        """
         # vector of solution
         solution = []
         while True:
