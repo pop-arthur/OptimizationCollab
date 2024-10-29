@@ -63,7 +63,6 @@ class VogelTable(Table):
                     min(list(filter(lambda t: t != 0, column_numbers)))
                 ), column_number
 
-            print(x, y)
             # subtract demand and supply and add solution
             solution.append(self.process_subtraction(x, y))
 

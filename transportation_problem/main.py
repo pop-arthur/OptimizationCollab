@@ -1,4 +1,3 @@
-from transportation_problem.objects.VogelTable import VogelTable
 from utils import *
 from objects import *
 
@@ -10,8 +9,9 @@ def main():
     table.show()
     print(
         "",
-        f"North-West Corner method: {NorthwestTable(table).get_solution()}",
-        f"Vogel’s approximation method: {VogelTable(table).get_solution()}",
+        f"North-West Corner method:\n{NorthwestTable(table).get_solution()}",
+        f"Vogel’s approximation method:\n{VogelTable(table).get_solution()}",
+        f"Russell’s approximation method:\n{RusselTable(table).get_solution()}",
         sep="\n"
     )
 
