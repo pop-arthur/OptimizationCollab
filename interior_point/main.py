@@ -12,4 +12,5 @@ vcof, mccf, inix, vrhsn, apac = input_vars()
 intpoint(vcof, mccf, inix, vrhsn, apac, 0.5)
 intpoint(vcof, mccf, inix, vrhsn, apac, 0.9)
 #Change params of function bellow somehow
-simplex_method(vcof.to_vector(), mccf, vrhsn.to_vector(), apac) #TODO: Correct the input arguments to the simplex_method classes. It should be Vector, Matrix, Vector, and float.
+
+simplex_method(vcof.to_vector(0), mccf, vrhsn.to_vector(0), apac) #TODO: Correct the input arguments to the simplex_method classes. It should be Vector, Matrix, Vector, and float.
