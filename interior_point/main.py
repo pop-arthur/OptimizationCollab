@@ -1,5 +1,5 @@
-from input_vars import input_vars
-from algorithm import intpoint
+from utils.input_vars import input_vars
+from utils.algorithm import intpoint
 from objects import *
 from utils.simplex_method.main import simplex_method
 from utils.simplex_method import objects as obj
