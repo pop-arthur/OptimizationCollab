@@ -1,6 +1,7 @@
 import math
 from typing import Union
 import copy
+from simplex_method.objects import Vector
 
 class Matrix:
     """
@@ -322,7 +323,13 @@ class Matrix:
         if vector_input:
             return self.transpose()
         return self
-    
+
+    def to_vector(self, index: int, by_row: bool = True) -> 'Vector':
+        if by_row:
+            return Vector(self.numbers[index])
+        else:
+            column_vector = [self.numbers[i][index] for i in range(self.rows)]
+            return Vector(column_vector)
 
 def main():
     """
