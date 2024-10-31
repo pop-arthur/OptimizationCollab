@@ -53,8 +53,11 @@ def to_Matrix(matrix: Matrix) -> 'obj.Matrix':
 # print()
 # print(A.inverse())
 vcof, mccf, inix, vrhsn, apac = input_vars()
-intpoint(vcof, mccf, inix, vrhsn, apac, 0.5)
-intpoint(vcof, mccf, inix, vrhsn, apac, 0.9)
-#Change params of function bellow somehow
+try:
+    intpoint(vcof, mccf, inix, vrhsn, apac, 0.5)
+    intpoint(vcof, mccf, inix, vrhsn, apac, 0.9)
+    #Change params of function bellow somehow
 
-simplex_method(to_vector(vcof, 0), to_Matrix(mccf), to_vector(vrhsn, 0), apac) #TODO: Correct the input arguments to the simplex_method classes. It should be Vector, Matrix, Vector, and float.
+    simplex_method(to_vector(vcof, 0), to_Matrix(mccf), to_vector(vrhsn, 0), apac) #TODO: Correct the input arguments to the simplex_method classes. It should be Vector, Matrix, Vector, and float.
+except Exception as e:
+    print("The method is not applicable! ")
