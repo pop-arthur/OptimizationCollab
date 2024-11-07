@@ -12,11 +12,11 @@ NOT_APPLICABLE_MESSAGE = "The method is not applicable!"
 def simplex_method(vcof: Vector, mccf: Matrix, vrhsn:Vector, apac:float):
     # Get user input
     # vcof, mccf, vrhsn, apac = input_variables()
-    print(type(vcof), type(mccf), type(vrhsn), type(apac))
+    # print(type(vcof), type(mccf), type(vrhsn), type(apac)) #For debugging purposes only
     if not (isinstance(vcof, Vector) and isinstance(mccf, Matrix) and isinstance(vrhsn, Vector)):
         raise ValueError("All inputs must be Vector and Matrix instances. Проще говоря пошёл нахуй")
-    print(isinstance(vcof, Vector))
-    print(vcof.numb_of_columns)
+    # print(isinstance(vcof, Vector)) #For debugging purposes only
+    # print(vcof.numb_of_columns) #For debugging purposes only 
     # check number of variables greater or equal to number of constrains
     if vcof.numb_of_columns < vrhsn.numb_of_columns:
         print(NOT_APPLICABLE_MESSAGE)

@@ -13,9 +13,13 @@ class Vector:
             self.row = row
         self.numb_of_columns = len(self.row)
     
-    @property
-    def numb_of_columns(self):
-        return len(self.row)
+    # @property
+    # def numb_of_columns(self):
+    #     return len(self.row)
+    
+    # @numb_of_columns.setter
+    # def numb_of_columns(self, value):
+    #     self.numb_of_columns = value
 
     def input(self):
         """
@@ -27,6 +31,8 @@ class Vector:
         return self
 
     def __getitem__(self, item):
+        # print(item, len(self.row)) #For debugging purposes only
+        # print(f"Getting item {item} from vector {self.row}") #For debugging purposes only
         return self.row[item]
 
     def multiply_by(self, coefficient):

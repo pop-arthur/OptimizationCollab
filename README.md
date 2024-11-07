@@ -9,3 +9,5 @@ This repository is created for "**Introduction to Optimization**" course by stud
 
 ## Assignments
 Assignment 1: _./simplex_method_
+Assignment 2: _./interior_point_
+Assignment 3: _./transportation_problem_

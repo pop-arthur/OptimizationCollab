@@ -322,7 +322,7 @@ class Matrix:
         if vector_input:
             return self.transpose()
         return self
-    
+
 
 def main():
     """
