@@ -8,14 +8,18 @@ def main():
 
     # create transportation table
     table = Table(supply, cost, demand)
+    # get solutions
+    north_west_solution = NorthwestTable(table).get_solution()
+    vogel_solution = VogelTable(table).get_solution()
+    russel_solution = RussellTable(table).get_solution()
     # show the table
     table.show()
     # print results
     print(
         "",
-        f"North-West Corner method:", NorthwestTable(table).get_solution(),
-        f"Vogel’s approximation method:", VogelTable(table).get_solution(),
-        f"Russell’s approximation method:", RussellTable(table).get_solution(),
+        f"North-West Corner method:", north_west_solution,
+        f"Vogel’s approximation method:", vogel_solution,
+        f"Russell’s approximation method:", russel_solution,
         sep="\n"
     )
 

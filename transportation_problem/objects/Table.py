@@ -1,4 +1,5 @@
 from tabulate import tabulate
+import numpy as np
 
 
 # class representing transportation table
@@ -33,12 +34,36 @@ class Table:
     def get_solution(self):
         pass
 
+    def get_basis_from_solution(self, coefficients: list[list[int]], rhs: list[int]):
+        """
+        solve system of linear equations Ax = b
+        :param coefficients: matrix A
+        :param rhs: vector b
+        :return: vector x
+        """
+        # check unused variables
+        while len(coefficients) != len(coefficients[0]):
+            for j in range(len(self.demand)):
+                if all(self.costs[i][j] == 0 for i in range(len(self.supply))):
+                    row = [0] * (len(self.demand) + len(self.supply))
+                    row[j] = 1
+                    coefficients.append(row)
+                    rhs.append(0)
+                    break
+
+        # calculate initial feasible solution
+        try:
+            x = np.linalg.solve(np.array(coefficients), np.array(rhs))
+        except Exception:
+            raise ValueError("The method is not applicable!")
+        return x
+
     def process_subtraction(self, x, y):
         """
         method that process operations over table when solution is defined
         :param x: x coordinate of solution
         :param y: y coordinate of solution
-        :return: solution string
+        :return: matrix A row and b component
         """
         # get possible amount
         amount = min(self.supply[x], self.demand[y])
@@ -57,4 +82,7 @@ class Table:
         if self.demand[y] == 0:
             for i in range(len(self.costs)):
                 self.costs[i][y] = 0
-        return f"{amount} * A{x + 1}B{y + 1} ({price})"
+        res = [0] * (len(self.demand) + len(self.supply))
+        res[x] = -1
+        res[len(self.supply) + y] = 1
+        return res, price

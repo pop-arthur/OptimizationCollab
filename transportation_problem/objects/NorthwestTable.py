@@ -1,3 +1,5 @@
+import numpy as np
+
 from transportation_problem.objects.Table import Table
 from copy import deepcopy
 
@@ -24,7 +26,8 @@ class NorthwestTable(Table):
         :return: vector of solution x0
         """
         # vector of solution
-        solution = []
+        coefficients = []
+        rhs = []
         while True:
             # get northwest non-empty cell
             x, y = self.find_non_empty_northwest_cell()
@@ -33,7 +36,9 @@ class NorthwestTable(Table):
                 break
 
             # subtract demand and supply and add solution
-            solution.append(self.process_subtraction(x, y))
+            coefficient_row, b_row = self.process_subtraction(x, y)
+            coefficients.append(coefficient_row)
+            rhs.append(b_row)
 
         # return found solution
-        return solution
+        return self.get_basis_from_solution(coefficients, rhs)

@@ -44,7 +44,8 @@ class VogelTable(Table):
         :return: vector of solution x0
         """
         # vector of solution
-        solution = []
+        coefficients = []
+        rhs = []
         while True:
             # get maximum difference between two min numbers
             rows_delta = self.get_rows_delta()
@@ -75,6 +76,9 @@ class VogelTable(Table):
                 ), column_number
 
             # subtract demand and supply and add solution
-            solution.append(self.process_subtraction(x, y))
+            coefficient_row, b_row = self.process_subtraction(x, y)
+            coefficients.append(coefficient_row)
+            rhs.append(b_row)
 
-        return solution
+            # return found solution
+        return self.get_basis_from_solution(coefficients, rhs)

@@ -30,7 +30,8 @@ class RussellTable(Table):
         :return: vector of solution x0
         """
         # vector of solution
-        solution = []
+        coefficients = []
+        rhs = []
         while True:
             # get vectors of maximum rows / columns
             row_max, col_max = self.get_max_in_the_row(), self.get_max_in_the_column()
@@ -56,7 +57,11 @@ class RussellTable(Table):
                         value = costs[i][j]
             if value >= 0:
                 break
-            # subtract demand and supply and add solution
-            solution.append(self.process_subtraction(x, y))
 
-        return solution
+            # subtract demand and supply and add solution
+            coefficient_row, b_row = self.process_subtraction(x, y)
+            coefficients.append(coefficient_row)
+            rhs.append(b_row)
+
+        # return found solution
+        return self.get_basis_from_solution(coefficients, rhs)
