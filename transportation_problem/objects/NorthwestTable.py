@@ -1,5 +1,3 @@
-import numpy as np
-
 from transportation_problem.objects.Table import Table
 from copy import deepcopy
 
