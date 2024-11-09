@@ -41,15 +41,14 @@ class Table:
         :param rhs: vector b
         :return: vector x
         """
-        # check unused variables
-        while len(coefficients) != len(coefficients[0]):
-            for j in range(len(self.demand)):
-                if all(self.costs[i][j] == 0 for i in range(len(self.supply))):
-                    row = [0] * (len(self.demand) + len(self.supply))
-                    row[j] = 1
-                    coefficients.append(row)
-                    rhs.append(0)
-                    break
+        # find amount of undefined variables
+        amount = len(coefficients[0]) - len(coefficients)
+        # set undefined variables equal to 0
+        for i in range(amount):
+            row = [0] * (len(self.supply) + len(self.demand))
+            row[i] = 1
+            coefficients.append(row)
+            rhs.append(0)
 
         # calculate initial feasible solution
         try:

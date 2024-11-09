@@ -9,9 +9,18 @@ def main():
     # create transportation table
     table = Table(supply, cost, demand)
     # get solutions
-    north_west_solution = NorthwestTable(table).get_solution()
-    vogel_solution = VogelTable(table).get_solution()
-    russel_solution = RussellTable(table).get_solution()
+    try:
+        north_west_solution = NorthwestTable(table).get_solution()
+    except ValueError as e:
+        north_west_solution = e
+    try:
+        vogel_solution = VogelTable(table).get_solution()
+    except ValueError as e:
+        vogel_solution = e
+    try:
+        russel_solution = RussellTable(table).get_solution()
+    except ValueError as e:
+        russel_solution = e
     # show the table
     table.show()
     # print results
@@ -25,10 +34,5 @@ def main():
 
 
 if __name__ == '__main__':
-    # except possible errors
-    try:
-        # call main function
-        main()
-    except ValueError as e:
-        print(e)
+    main()
 
